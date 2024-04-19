@@ -1,0 +1,30 @@
+// Pin Declaration
+#define Trig_Pin 2
+#define Echo_Pin 3
+
+// Variable Declaration
+long Time_Duration;
+int Distance;
+int True_Distance;
+
+void setup() {
+  pinMode(Trig_Pin,OUTPUT);
+  pinMode(Echo_Pin,INPUT);
+  Serial.begin(115200);
+}
+
+void loop() {
+  digitalWrite(Trig_Pin,LOW);
+  delayMicroseconds(2);
+
+  digitalWrite(Trig_Pin,HIGH);
+  delayMicroseconds(10);
+  digitalWrite(Trig_Pin,LOW);
+
+  Time_Duration = pulseIn(Echo_Pin,HIGH);
+  Distance = Time_Duration * 0.034;
+  True_Distance = Distance/2;
+  Serial.print("Distance : ");
+  Serial.println(True_Distance);
+  delay(100);
+}
